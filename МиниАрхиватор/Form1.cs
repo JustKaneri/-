@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace МиниАрхиватор
 {
@@ -15,6 +16,16 @@ namespace МиниАрхиватор
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Packed(string baseFile,string arhivFile)
+        {
+
+        }
+
+        private void UnPacked()
+        {
+
         }
     }
 }
