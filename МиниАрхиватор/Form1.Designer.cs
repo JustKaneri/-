@@ -43,6 +43,7 @@
             this.BtnPuck.TabIndex = 0;
             this.BtnPuck.Text = "Упаковать файл";
             this.BtnPuck.UseVisualStyleBackColor = true;
+            this.BtnPuck.Click += new System.EventHandler(this.BtnPuck_Click);
             // 
             // BtnUnPack
             // 
