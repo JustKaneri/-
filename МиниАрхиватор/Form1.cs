@@ -33,9 +33,9 @@ namespace МиниАрхиватор
             BinaryWriter fileWriter = new BinaryWriter(File.Open(arhivFile,FileMode.Create));
 
             //запись имени файла
-            //fileWriter.Write(Path.GetFileName(baseFile));
+            fileWriter.Write(Path.GetFileName(baseFile));
             len = fileReader.BaseStream.Length;//Lenght file.
-
+             
             while (fileReader.BaseStream.Position < len) 
             {
                 currentByte = fileReader.ReadByte();
@@ -118,8 +118,48 @@ namespace МиниАрхиватор
             fileWriter.Close();
         }
 
-        private void UnPacked()
+        private void UnPacked(string filePack, string folder)
         {
+            BinaryReader fRid = new BinaryReader(File.Open(filePack, FileMode.Open));
+
+            //Имя упакованого файла.
+            string name =  fRid.ReadString();
+            name = folder + @"\" + name;
+
+            BinaryWriter fWrit = new BinaryWriter(File.Open(name,FileMode.Create));
+
+            long Len = fRid.BaseStream.Length;
+            byte currentByte;
+
+            while (fRid.BaseStream.Position < Len)
+            {
+                currentByte = fRid.ReadByte();
+
+                //Если в начале цепочки без повтора
+                if(currentByte == 0)
+                {
+                    byte lght = fRid.ReadByte();
+                    for (int i = 0; i < lght; i++)
+                    {
+                        currentByte = fRid.ReadByte();
+                        fWrit.Write(currentByte);
+                    }
+
+                }
+                else //С повторами
+                {
+                    byte lght = currentByte;
+                    currentByte = fRid.ReadByte();
+                    for (int i = 0; i < lght; i++)
+                    {
+                        fWrit.Write(currentByte);
+                    }
+
+                }
+            }
+
+            fWrit.Close();
+            fRid.Close();
 
         }
 
@@ -131,6 +171,20 @@ namespace МиниАрхиватор
                 string fileArh = Path.GetDirectoryName(fileBase) + @"\"+ Path.GetFileNameWithoutExtension(fileBase)+".pack";
 
                 Packed(fileBase, fileArh);
+
+                MessageBox.Show("Упаковка завершена успешна","Внимание",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+        }
+
+        private void BtnUnPack_Click(object sender, EventArgs e)
+        {
+            if(openFileDialog2.ShowDialog()== DialogResult.OK)
+            {
+                string fileName = openFileDialog2.FileName;
+                string directori = Path.GetDirectoryName(fileName);
+
+                UnPacked(fileName, directori);
+                MessageBox.Show("Распаковка завершена успешна", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

@@ -37,22 +37,25 @@
             // 
             // BtnPuck
             // 
+            this.BtnPuck.BackColor = System.Drawing.Color.White;
             this.BtnPuck.Location = new System.Drawing.Point(96, 53);
             this.BtnPuck.Name = "BtnPuck";
             this.BtnPuck.Size = new System.Drawing.Size(167, 49);
             this.BtnPuck.TabIndex = 0;
             this.BtnPuck.Text = "Упаковать файл";
-            this.BtnPuck.UseVisualStyleBackColor = true;
+            this.BtnPuck.UseVisualStyleBackColor = false;
             this.BtnPuck.Click += new System.EventHandler(this.BtnPuck_Click);
             // 
             // BtnUnPack
             // 
+            this.BtnUnPack.BackColor = System.Drawing.Color.White;
             this.BtnUnPack.Location = new System.Drawing.Point(96, 147);
             this.BtnUnPack.Name = "BtnUnPack";
             this.BtnUnPack.Size = new System.Drawing.Size(167, 48);
             this.BtnUnPack.TabIndex = 1;
             this.BtnUnPack.Text = "Расфпоковать файл";
-            this.BtnUnPack.UseVisualStyleBackColor = true;
+            this.BtnUnPack.UseVisualStyleBackColor = false;
+            this.BtnUnPack.Click += new System.EventHandler(this.BtnUnPack_Click);
             // 
             // openFileDialog2
             // 
